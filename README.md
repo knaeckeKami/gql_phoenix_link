@@ -1,22 +1,4 @@
-A library for Dart developers.
+# gql_phoenix_link
 
-Created from templates made available by Stagehand under a BSD-style
-[license](https://github.com/dart-lang/stagehand/blob/master/LICENSE).
-
-## Usage
-
-A simple usage example:
-
-```dart
-import 'package:gql_phoenix_link/gql_phoenix_link.dart';
-
-main() {
-  var awesome = new Awesome();
-}
-```
-
-## Features and bugs
-
-Please file feature requests and bugs at the [issue tracker][tracker].
-
-[tracker]: http://example.com/issues/replaceme
+An experimental gql Link using Phoenix Channels.
+Supports queries, mutations and subscriptions.
