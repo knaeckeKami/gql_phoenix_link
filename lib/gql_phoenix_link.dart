@@ -3,6 +3,6 @@
 /// More dartdocs go here.
 library gql_phoenix_link;
 
-export 'src/gql_phoenix_link_base.dart';
+export 'src/phoenix_link.dart';
 
 // TODO: Export any libraries intended for clients of this package.
