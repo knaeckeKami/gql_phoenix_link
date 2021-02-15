@@ -8,7 +8,7 @@ environment:
 
 dependencies:
   meta: ^1.2.2
-  phoenix_socket: ^0.3.3
+  phoenix_socket: ^0.4.2
   gql_exec: ^0.2.4
   gql_link: ^0.3.0
 
