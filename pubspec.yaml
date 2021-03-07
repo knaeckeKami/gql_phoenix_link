@@ -1,16 +1,16 @@
 name: gql_phoenix_link
 description: A starting point for Dart libraries or applications.
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/knaeckeKami/gql_phoenix_link
 
 environment:
   sdk: '>=2.8.1 <3.0.0'
 
 dependencies:
-  meta: ^1.2.2
-  phoenix_socket: ^0.3.3
-  gql_exec: ^0.2.4
-  gql_link: ^0.3.0
+  meta: ^1.3.0
+  phoenix_socket: ^0.4.1
+  gql_exec: ^0.2.5
+  gql_link: ^0.3.1
 
 dev_dependencies:
   pedantic: ^1.9.0

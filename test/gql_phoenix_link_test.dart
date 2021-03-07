@@ -1,16 +1,43 @@
-import 'package:gql_phoenix_link/gql_phoenix_link.dart';
-import 'package:test/test.dart';
+import 'dart:async';
+int val = 1;
+final eventSource = Stream.periodic(Duration(seconds: 1), (_) => val++);
 
-void main() {
-  group('A group of tests', () {
-    Awesome awesome;
+Stream<int> eventEmitter() async* {
+  print("enter emitter");
+  final controller = StreamController<int>.broadcast();
+  StreamSubscription sub;
+  try {
+    sub=eventSource.listen(controller.add);
+    yield* controller.stream;
+  } finally {
+    print("after yield cleanup!");
+    sub.cancel();
+    controller.close();
+  }
+}
 
-    setUp(() {
-      awesome = Awesome();
-    });
+Stream<int> transformAsync(Stream<int> stream) async* {
+  try{
+  await for (final value in stream) {
+    print("pre yield");
+    yield value + 1;
+    print("post yield");
+  }
+  }catch(e){
+    yield 0;
+  }
+}
 
-    test('First Test', () {
-      expect(awesome.isAwesome, isTrue);
-    });
-  });
+Stream<int> transformAsync2(Stream<int> stream) {
+  return stream.map((value) => value + 1);
+}
+
+void main() async {
+ 
+  
+  final subscription = transformAsync2(eventEmitter()).listen((v) {print("got $v");});
+  await Future.delayed(Duration(milliseconds: 1500));
+  print("cancel sub");
+  subscription.cancel();
+  await Future.delayed(Duration(milliseconds: 1000));
 }
