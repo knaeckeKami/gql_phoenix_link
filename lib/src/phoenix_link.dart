@@ -5,7 +5,6 @@ import 'package:meta/meta.dart';
 import 'package:phoenix_socket/phoenix_socket.dart';
 import 'package:gql_exec/src/request.dart';
 import 'package:gql_exec/src/response.dart';
-import 'package:pedantic/pedantic.dart';
 
 /// a link for subscriptions (or also mutations/queries) over phoenix channels
 class PhoenixLink extends Link {
@@ -73,8 +72,8 @@ class PhoenixLink extends Link {
         throw _parser.parseError(pushResponse.response as Map<String, dynamic>);
       }
     } finally {
-      unawaited(websocketSubscription?.cancel());
-      unawaited(streamController?.close());
+      await websocketSubscription?.cancel();
+      await streamController?.close();
       //this will be called once the caller stops listening to the stream
       // (yield* stops if there is no one listening)
       if (phoenixSubscriptionId != null) {
