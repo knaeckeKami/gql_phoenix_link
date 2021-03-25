@@ -5,13 +5,13 @@ final eventSource = Stream.periodic(Duration(seconds: 1), (_) => val++);
 Stream<int> eventEmitter() async* {
   print("enter emitter");
   final controller = StreamController<int>.broadcast();
-  StreamSubscription sub;
+  StreamSubscription? sub;
   try {
     sub=eventSource.listen(controller.add);
     yield* controller.stream;
   } finally {
     print("after yield cleanup!");
-    sub.cancel();
+    sub?.cancel();
     controller.close();
   }
 }
