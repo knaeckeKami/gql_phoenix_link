@@ -1,9 +1,8 @@
 import 'dart:async';
 
+import 'package:gql_exec/gql_exec.dart';
 import 'package:gql_link/gql_link.dart';
 import 'package:phoenix_socket/phoenix_socket.dart';
-import 'package:gql_exec/src/request.dart';
-import 'package:gql_exec/src/response.dart';
 
 /// a link for subscriptions (or also mutations/queries) over phoenix channels
 class PhoenixLink extends Link {
@@ -79,13 +78,5 @@ class PhoenixLink extends Link {
         channel.push('unsubscribe', {'subscriptionId': phoenixSubscriptionId});
       }
     }
-  }
-
-  Response parseMessage(Message message) {
-    final payload = message.payload?['result'];
-    if (payload != null) {
-      return _parser.parseResponse(payload as Map<String, dynamic>);
-    }
-    return Response(data: message.payload);
   }
 }
